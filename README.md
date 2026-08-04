@@ -23,6 +23,7 @@ Click on the "Releases" tab on the right.
 
 OnSIDES is an international, comprehensive database of drugs and their adverse events using data from drug product labels.
 Information was extracted by fine-tuning a [PubMedBERT language model](https://huggingface.co/microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract) on 200 manually curated labels available from [Denmer-Fushman et al.](https://pubmed.ncbi.nlm.nih.gov/29381145/).
+The fine-tuned model is available on [HuggingFace](https://huggingface.co/tatonettilab/onsides-bert).
 This comprehensive database will be updated quarterly, and currently contains more than 7.1 million drug-ADE pairs for 4,097 drug ingredients extracted from 51,460 labels, processed from all of the labels available to download from [DailyMed (USA)](https://dailymed.nlm.nih.gov/dailymed/spl-resources-all-drug-labels.cfm), [EMA (EU)](https://www.ema.europa.eu/en/medicines), [EMC (UK)](https://www.medicines.org.uk/emc), and [KEGG (Japan)](https://www.kegg.jp/kegg/drug/) as of April 2026.
 
 ### Citation
@@ -173,7 +174,7 @@ OnSIDES is generated through the following steps:
 
 ## Model accuracy
 
-A single fine-tuned PubMedBERT model trained on all sections is used for OnSIDES. Performance on the held-out test set (80/10/10 drug-level split of 200 manually annotated FDA labels):
+A single fine-tuned PubMedBERT model trained on all sections is used for OnSIDES. The model is publicly available at [tatonettilab/onsides-bert](https://huggingface.co/tatonettilab/onsides-bert) on HuggingFace. Performance on the held-out test set (80/10/10 drug-level split of 200 manually annotated FDA labels):
 
 | Section   |       F1 |   Precision |   Recall |    AUROC |     N |
 |:----------|---------:|------------:|---------:|---------:|------:|
