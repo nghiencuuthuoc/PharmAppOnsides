@@ -1,0 +1,44 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2025 Tatonetti Lab
+
+The OnSIDES data (the database and all data files distributed as part of
+OnSIDES releases, including the flat files, SQLite database, and manual
+annotations) is licensed under the Creative Commons Attribution 4.0
+International License (CC BY 4.0).
+
+The software in this repository (source code, scripts, and workflows) is
+licensed separately under the MIT License. See the LICENSE file.
+
+You are free to:
+
+  * Share — copy and redistribute the material in any medium or format
+  * Adapt — remix, transform, and build upon the material for any purpose,
+    even commercially
+
+under the following terms:
+
+  * Attribution — You must give appropriate credit, provide a link to the
+    license, and indicate if changes were made. You may do so in any
+    reasonable manner, but not in any way that suggests the licensor
+    endorses you or your use.
+
+  * No additional restrictions — You may not apply legal terms or
+    technological measures that legally restrict others from doing anything
+    the license permits.
+
+To attribute OnSIDES, please cite:
+
+  Tanaka Y, Chen HY, Belloni P, Gisladottir U, Kefeli J, Patterson J,
+  Srinivasan A, Zietz M, Sirdeshmukh G, Berkowitz J, LaRow Brown K,
+  Tatonetti NP. OnSIDES database: Extracting adverse drug events from drug
+  labels using natural language processing models. Med. 2025 Mar
+  27:100642. doi: 10.1016/j.medj.2025.100642. PMID: 40179876.
+
+The full legal text of the CC BY 4.0 license is available at:
+
+  https://creativecommons.org/licenses/by/4.0/legalcode
+
+A human-readable summary is available at:
+
+  https://creativecommons.org/licenses/by/4.0/

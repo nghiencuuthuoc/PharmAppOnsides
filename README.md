@@ -14,6 +14,7 @@ Click on the "Releases" tab on the right.
 - [Developer documentation](#developer-documentation)
 - [Updating the database](#updating-the-database)
 - [Limitations](#limitations)
+- [License](#license)
 - [Contact](#contact)
 
 ---
@@ -312,8 +313,8 @@ If you are running the pipeline manually without an AI agent, see `UPDATE_INSTRU
 
 ## Limitations
 
-OnSIDES is **strictly** intended for academic research purposes.
-The adverse drug event term extraction method is far from perfect - some side effects will be missed and some predicted as true adverse events will be incorrect.
+OnSIDES is provided as a research resource, without any warranty as to its accuracy, completeness, or fitness for any particular purpose.
+The adverse drug event term extraction method is imperfect - some side effects will be missed and some predicted as true adverse events will be incorrect.
 
 **Patients/healthcare professionals seeking health information should not trust or use this data, and instead refer to the information available from their regions' respective drug regulatory agencies, such as the [FDA](https://www.fda.gov/) (USA), [EMA](https://www.ema.europa.eu/en) (EU), [MHRA](https://www.gov.uk/government/organisations/medicines-and-healthcare-products-regulatory-agency) (UK), [PMDA](https://www.pmda.go.jp/english/) (Japan) and consult their healthcare providers for information.**
 
@@ -321,6 +322,17 @@ Additionally, this project is under active development.
 We are continuing to further conduct independent validation of the performance of the models used, and improve the extraction methodology.
 As such, the data, methods, and statistics are subject to change at any time.
 Any updates to the database will be reflected on this page/in this repository.
+
+---
+
+## License
+
+OnSIDES is dual-licensed to distinguish the software from the data:
+
+- **Software** — the source code, scripts, and workflows in this repository are licensed under the [MIT License](LICENSE).
+- **Data** — the OnSIDES data (the database and all data files distributed as part of OnSIDES releases, including the flat files, the SQLite database, and the manual annotations) is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](LICENSE-DATA).
+
+If you use the OnSIDES data, please provide attribution by citing [our paper](https://doi.org/10.1016/j.medj.2025.100642) (see [Citation](#citation)).
 
 ---
 
