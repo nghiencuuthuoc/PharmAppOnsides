@@ -1,0 +1,45 @@
+name: onsides-dev
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - openjdk=11
+  - poppler
+  - pandoc
+  - duckdb
+  - pip
+  - pip:
+      # Intel Mac (osx-64) workaround: torch>=2.6.0 has no wheel,
+      # pin CPU torch 2.2.2 + compatible stack. On Linux CUDA use torch>=2.6.0.
+      - torch==2.2.2 --index-url https://download.pytorch.org/whl/cpu
+      - transformers==4.50.3
+      - tokenizers==0.21.4
+      - numpy==1.26.4
+      - scipy==1.14.1
+      - scikit-learn==1.5.2
+      - -e . --no-deps
+      - beautifulsoup4==4.15.0
+      - connectorx==0.4.6
+      - fastexcel==0.21.0
+      - httpx==0.28.1
+      - lxml==6.1.3
+      - openpyxl==3.1.5
+      - pandas==3.0.6
+      - polars==1.44.2
+      - pyahocorasick==2.3.1
+      - pyarrow==25.0.1
+      - pydantic==2.13.5
+      - PyPDF2==3.0.1
+      - ratelimit==2.2.1
+      - rich==15.0.0
+      - snakemake==9.27.0
+      - SQLAlchemy==2.0.54
+      - sqlmodel==0.0.37
+      - tabula-py==2.10.0
+      - tqdm==4.70.1
+      - safetensors==0.8.0
+      - fastapi==0.141.1
+      - uvicorn==0.53.0
+      - PyYAML==6.0.3
+      - pytest==9.1.1

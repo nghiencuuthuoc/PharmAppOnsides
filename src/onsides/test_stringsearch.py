@@ -15,10 +15,10 @@ from onsides.types import IndexedText
 @pytest.fixture
 def search_terms():
     return [
-        IndexedText(text="foo", text_id=1),
-        IndexedText(text="bar", text_id=2),
-        IndexedText(text="baz", text_id=3),
-        IndexedText(text="zab", text_id=4),
+        IndexedText(text="foo", text_id="1"),
+        IndexedText(text="bar", text_id="2"),
+        IndexedText(text="baz", text_id="3"),
+        IndexedText(text="zab", text_id="4"),
     ]
 
 
@@ -30,43 +30,43 @@ def search_tree(search_terms):
 @pytest.mark.parametrize(
     "text,expected",
     [
-        ("baz", [_FoundTerm(term_id=3, term="baz", start=0, end=2)]),
+        ("baz", [_FoundTerm(term_id="3", term="baz", start=0, end=2)]),
         (
             "bar baz",
             [
-                _FoundTerm(term_id=2, term="bar", start=0, end=2),
-                _FoundTerm(term_id=3, term="baz", start=4, end=6),
+                _FoundTerm(term_id="2", term="bar", start=0, end=2),
+                _FoundTerm(term_id="3", term="baz", start=4, end=6),
             ],
         ),
         (
             "foo baz",
             [
-                _FoundTerm(term_id=1, term="foo", start=0, end=2),
-                _FoundTerm(term_id=3, term="baz", start=4, end=6),
+                _FoundTerm(term_id="1", term="foo", start=0, end=2),
+                _FoundTerm(term_id="3", term="baz", start=4, end=6),
             ],
         ),
         (
             "foo bar",
             [
-                _FoundTerm(term_id=1, term="foo", start=0, end=2),
-                _FoundTerm(term_id=2, term="bar", start=4, end=6),
+                _FoundTerm(term_id="1", term="foo", start=0, end=2),
+                _FoundTerm(term_id="2", term="bar", start=4, end=6),
             ],
         ),
         (
             "foo bar baz",
             [
-                _FoundTerm(term_id=1, term="foo", start=0, end=2),
-                _FoundTerm(term_id=2, term="bar", start=4, end=6),
-                _FoundTerm(term_id=3, term="baz", start=8, end=10),
+                _FoundTerm(term_id="1", term="foo", start=0, end=2),
+                _FoundTerm(term_id="2", term="bar", start=4, end=6),
+                _FoundTerm(term_id="3", term="baz", start=8, end=10),
             ],
         ),
         (
             # Terms overlap (share characters)
             "foobazab",
             [
-                _FoundTerm(term_id=1, term="foo", start=0, end=2),
-                _FoundTerm(term_id=3, term="baz", start=3, end=5),
-                _FoundTerm(term_id=4, term="zab", start=5, end=7),
+                _FoundTerm(term_id="1", term="foo", start=0, end=2),
+                _FoundTerm(term_id="3", term="baz", start=3, end=5),
+                _FoundTerm(term_id="4", term="zab", start=5, end=7),
             ],
         ),
     ],
@@ -81,7 +81,7 @@ def test_find_terms(search_tree, text: str, expected: list[int]):
         (
             # Basic example
             "foo bar baz",
-            _FoundTerm(term_id=1, term="bar", start=4, end=6),
+            _FoundTerm(term_id="1", term="bar", start=4, end=6),
             1,
             0.5,
             "bar foo EVENT baz",
@@ -89,7 +89,7 @@ def test_find_terms(search_tree, text: str, expected: list[int]):
         (
             # Ignore prop_before if there are no words before the match
             "foo bar baz",
-            _FoundTerm(term_id=1, term="bar", start=4, end=6),
+            _FoundTerm(term_id="1", term="bar", start=4, end=6),
             1,
             0.15,
             "bar foo EVENT baz",
@@ -97,7 +97,7 @@ def test_find_terms(search_tree, text: str, expected: list[int]):
         (
             # Behave correctly if match is at the end of the text
             "foo bar baz",
-            _FoundTerm(term_id=2, term="baz", start=8, end=10),
+            _FoundTerm(term_id="2", term="baz", start=8, end=10),
             1,
             0.5,
             "baz bar EVENT",
@@ -105,7 +105,7 @@ def test_find_terms(search_tree, text: str, expected: list[int]):
         (
             # Correctly extract multiple words
             "a b bar c d",
-            _FoundTerm(term_id=2, term="bar", start=4, end=6),
+            _FoundTerm(term_id="2", term="bar", start=4, end=6),
             6,
             0.5,
             "bar a b EVENT c d",
@@ -113,7 +113,7 @@ def test_find_terms(search_tree, text: str, expected: list[int]):
         (
             # Correctly limit the total number of words
             "a b c bar d e f",
-            _FoundTerm(term_id=2, term="bar", start=6, end=8),
+            _FoundTerm(term_id="2", term="bar", start=6, end=8),
             6,
             0.5,
             "bar b c EVENT d e",
@@ -121,7 +121,7 @@ def test_find_terms(search_tree, text: str, expected: list[int]):
         (
             # Correctly limit the total number of words
             "a b c bar d e f",
-            _FoundTerm(term_id=2, term="bar", start=6, end=8),
+            _FoundTerm(term_id="2", term="bar", start=6, end=8),
             6,
             0.5,
             "bar b c EVENT d e",
@@ -129,7 +129,7 @@ def test_find_terms(search_tree, text: str, expected: list[int]):
         (
             # Respect the prop_before parameter
             "a b c bar d e f",
-            _FoundTerm(term_id=2, term="bar", start=6, end=8),
+            _FoundTerm(term_id="2", term="bar", start=6, end=8),
             6,
             0.75,
             "bar a b c EVENT d",
@@ -147,40 +147,40 @@ def test_parse_texts(
     search_terms,
 ):
     texts = [
-        IndexedText(text_id=1, text="qux mux lux foo abc def ghi"),
-        IndexedText(text_id=2, text="qux mux lux foobarbaz abc def ghi"),
+        IndexedText(text_id="1", text="qux mux lux foo abc def ghi"),
+        IndexedText(text_id="2", text="qux mux lux foobarbaz abc def ghi"),
     ]
     settings = ContextSettings(nwords=1, prop_before=0.5)
     results = parse_texts(texts, search_terms, settings, progress=False)
     expected = [
         MatchContext(
             match_id=0,
-            text_id=1,
-            term_id=1,
+            text_id="1",
+            term_id="1",
             term="foo",
             context="foo lux EVENT abc",
         ),
         # Handle match inside a word (at the start)
         MatchContext(
             match_id=1,
-            text_id=2,
-            term_id=1,
+            text_id="2",
+            term_id="1",
             term="foo",
             context="foo lux EVENT barbaz",
         ),
         # Handle match inside a word (in the middle)
         MatchContext(
             match_id=2,
-            text_id=2,
-            term_id=2,
+            text_id="2",
+            term_id="2",
             term="bar",
             context="bar foo EVENT baz",
         ),
         # Handle match inside a word (at the end)
         MatchContext(
             match_id=3,
-            text_id=2,
-            term_id=3,
+            text_id="2",
+            term_id="3",
             term="baz",
             context="baz foobar EVENT abc",
         ),
