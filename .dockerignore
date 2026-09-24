@@ -1,0 +1,17 @@
+_onsides/
+_onsides_old/
+data/
+models/
+train/models/
+train/results/
+results/
+annotations/
+database/csv/
+database/onsides.db
+duck.db*
+log/
+.snakemake/
+.git/
+__pycache__/
+*.pyc
+.venv/
