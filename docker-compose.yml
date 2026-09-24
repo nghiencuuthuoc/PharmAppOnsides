@@ -1,0 +1,46 @@
+# OnSIDES databases (Docker replacement for database/database_scripts/*.sh)
+# Usage: docker compose up -d  (then load CSVs per WINDOWS_SETUP.md step 6)
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: onsides-postgres
+    environment:
+      POSTGRES_USER: onsides
+      POSTGRES_PASSWORD: onsides
+      POSTGRES_DB: onsides
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database/schema/postgres.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U onsides -d onsides"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysql:
+    image: mysql:8.4
+    container_name: onsides-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: onsides-root
+      MYSQL_USER: onsides
+      MYSQL_PASSWORD: onsides
+      MYSQL_DATABASE: onsides
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uonsides", "-ponsides"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # SQLite needs no container: use database/onsides.db built by the
+  # export step, or import CSVs with the sqlite3 CLI (see WINDOWS_SETUP.md).
+
+volumes:
+  pgdata:
+  mysqldata:
