@@ -98,9 +98,11 @@ Lưu ý: G: chỉ ~7.8GB trống — full ~21GB+ không vừa.
 
 ## 8. Việc còn dở (máy mới tiếp tục)
 
-- `git push origin dev/intel-mac`: commit local hơn remote, kẹt auth —
-  chạy tay + xác thực browser (device-code), không dùng PAT dán sẵn.
+- ĐÃ XONG 2026-09-25: nhánh `PharmAppOnsides_v2026.01` đã push
+  (3 commits), remote `dev/intel-mac` đã xóa.
 - OMOP thật thay 2 file test; `.pth` weights (máy Mac hoặc train).
 - Download labels chưa xong (theo dõi `log/download_full.log`).
 - Docker Desktop phải mở trước mọi lệnh docker; tắt máy giữa chừng thì
   `compose up -d` lại + snakemake resume.
+- Muốn `docker` trong Ubuntu: tick WSL Integration trong Docker Desktop
+  (không bắt buộc).
