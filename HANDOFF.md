@@ -4,6 +4,19 @@ Date: 2026-09-25. Branch: `dev/intel-mac` on `PharmAppOnsides`.
 Mac staging stops bulk downloads here; it runs **smoke tests only**
 (`scripts/smoke_test.sh`). Full pipeline runs on the GPU machine.
 
+## 0. Physical copy on external drive (2026-09-25, verified)
+
+- Location: **`/Volumes/SSD4T-QC/PharmAppOnsides/`** (exFAT 4TB, 367GB free).
+- Content: full repo checkout (incl. `.git` @ `dev/intel-mac`) + `_onsides/`
+  + `data/` + `models/` + `data/umls_chunks/` (UMLS chunks 0-1, 256MB).
+- Verified byte-identical (logical bytes + file counts):
+  `us/download` 17,924,348,331 B · `uk/labels` 10,250 files ·
+  `eu/labels` 5,394 files · `jp` 20,778 files ·
+  `omop_vocab` 2,566,369,545 B · `models/onsides-bert` 438,873,435 B.
+- NOTE exFAT: `du` over-reports (~1MB clusters) — trust file counts/bytes,
+  not `du`. Plug into Windows machine and copy to NTFS/ext4, or run
+  directly from the drive (slower).
+
 ## 1. What to copy to the GPU machine (gitignored, NOT in git)
 
 | Path | Size | Status 2026-09-25 | Note |
