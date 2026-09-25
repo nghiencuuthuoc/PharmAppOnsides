@@ -31,3 +31,13 @@ database/onsides.db
 db.zip
 summary.md
 .DS_Store
+
+# Windows / local-only (never commit)
+*.lnk
+*.exe
+*.log
+New Text Document.txt
+chat.md
+prompt_onsides.md
+ssh-*.bat
+tai-cloudflared.bat
