@@ -49,22 +49,21 @@ snakemake -s snakemake/jp/download/Snakefile --resources jobs=1 --keep-going --r
 # Parse, then checkpoints from WINDOWS_SETUP.md §6
 ```
 
-## 3. Finish UMLS MRCONSO (licensed, UTS API key required)
+## 3. UMLS MRCONSO — RESOLVED via machine-to-machine copy (2026-09-25)
 
-- Package: `umls-2026AA-mrconso.zip` (513,241,436 B) at
-  `https://download.nlm.nih.gov/umls/kss/2026AA/`.
-- Auth flow that works: TGT = `POST https://utslogin.nlm.nih.gov/cas/v1/api-key`
-  (`--data-urlencode apikey=$KEY`) → per-attempt ST =
-  `POST $TGT` (`service=<full zip URL>`, single-use!) → download with
-  `-c/-b` cookie jar (`MOD_AUTH_CAS`) following redirects.
-- Server throttles rapid/reused tickets: **one stream at a time, no `--retry`
-  with the same ticket** (a retried burned ticket overwrites good bytes with
-  the 4596-byte login HTML). Resume with fresh ST + explicit `-r START-END`.
-- Chunks: `[0-128310358] [128310359-256620717] [256620718-384931077]
-  [384931078-513241435]` → `cat` → `unzip` → place full file as
-  `data/MRCONSO.RRF` (**uppercase**). Validate: millions of lines
-  (`wc -l`), not a sample.
-- Regenerate the UTS API key afterwards (it passed through chat).
+- Source: `/Volumes/SSD4T-QC/PharmAppOnsides_v2026.01/Onsides_nodaily_20260925_0914.zip`
+  (Windows machine snapshot, 1.8GB/9,839 files — listed with `unzip -l` only).
+- Taken (single-file `unzip -p` streams, archive itself untouched):
+  - `data/MRCONSO.RRF` = **2,340,511,941 B, 18,064,970 lines**, 120,810 `|MDR|`
+    rows, 360,528 `|RXNORM|` rows — full release, verified.
+  - `models/microsoft/BiomedNLP-PubMedBERT-base-uncased-abstract/`
+    (`pytorch_model.bin` 440,474,434 B + config/tokenizer/vocab) — exactly the
+    `network_path` default in `snakemake/onsides/evaluate/Snakefile`.
+- Skipped: their `data/omop_vocab/*.csv` (543/212 B stubs — ours verified good),
+  their `_onsides/uk` (1,773 vs ours 10,250), their `models/onsides-bert`
+  (identical to ours). No trained `.pth` in the zip (see §4).
+- The slow NLM direct download (CAS ticket flow documented in git history) is
+  no longer needed; UTS API key should still be regenerated (passed chat).
 
 ## 4. Open dev item for the GPU machine: evaluate weights format
 
